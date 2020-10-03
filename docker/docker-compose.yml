@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: silhouette-mysql
+    image: mysql/mysql-server:5.6
+    ports:
+      - "3306:3306"
+    command: [
+      "mysqld",
+      "--character-set-server=utf8mb4",
+      "--lower_case_table_names=1",
+      "--sql_mode=TRADITIONAL",
+      "--explicit_defaults_for_timestamp=ON"
+    ]
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - ./mysql/initialize-sql:/docker-entrypoint-initdb.d
